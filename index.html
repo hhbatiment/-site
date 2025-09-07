@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hhbatiment - Travaux & Services</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <img src="images/logo.png" alt="Logo Hhbatiment" class="logo">
+    <h1>Hhbatiment</h1>
+    <p>Gérant: Haroun Jaballah</p>
+  </header>
+
+  <div class="container">
+
+    <div class="info">
+      <h2>Contacts</h2>
+      <p><b>Téléphone / WhatsApp:</b> 0039 3881614637</p>
+      <p><b>Adresse:</b> 27 Boulevard de l'Arène, 06300 Nice</p>
+      <p><b>Expérience:</b> 15 ans</p>
+    </div>
+
+    <div class="qrcode">
+      <h3>Scan Me</h3>
+      <img src="images/qrcode.png" alt="QR Code">
+    </div>
+
+    <div class="promo">
+      <p>🇫🇷 Vos projets, notre expertise !  | 🇮🇹 I tuoi progetti, la nostra esperienza!</p>
+    </div>
+
+    <h2 style="text-align:center;">Galerie des Travaux / Galleria dei Lavori</h2>
+    <div class="slider">
+      <div class="slides">
+        <img src="images/work1.jpg" alt="Travail 1" class="zoomable">
+        <img src="images/work2.jpg" alt="Travail 2" class="zoomable">
+        <img src="images/work3.jpg" alt="Travail 3" class="zoomable">
+      </div>
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+    </div>
+
+  </div>
+
+  <div id="lightbox" class="hidden">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" src="" alt="Zoom Image">
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Hhbatiment. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    const slides = document.querySelector(".slides");
+    const slideImages = document.querySelectorAll(".slides img");
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
+    const zoomImages = document.querySelectorAll(".zoomable");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const closeBtn = document.querySelector("#lightbox .close");
+
+    let index = 0;
+
+    function showSlide(n) {
+      if (n < 0) index = slideImages.length - 1;
+      else if (n >= slideImages.length) index = 0;
+      else index = n;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    prevBtn.addEventListener("click", () => showSlide(index - 1));
+    nextBtn.addEventListener("click", () => showSlide(index + 1));
+
+    zoomImages.forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.remove("hidden");
+      });
+    });
+
+    closeBtn.addEventListener("click", () => lightbox.classList.add("hidden"));
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) lightbox.classList.add("hidden"); });
+
+    showSlide(index);
+  </script>
+
+</body>
+</html>
